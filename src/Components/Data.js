@@ -1,36 +1,42 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./data.css"
+import Counter from "./Counter";
+
 
 export default function Data() {
   const [data, setState] = useState([]);
+
+
   useEffect(() => {
     fetch(
       "https://api.harvardartmuseums.org/gallery?apikey=5858ca01-d093-45fd-8ba8-5ab8317ab101"
     )
       .then((res) => res.json())
-      .then((data) => setState(data.records));
+      .then((info) => setState(info.records));
   }, []);
-  console.log(121);
+
+  const mystyle = {
+    color: "red",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial",
+    marginBottom: "100px" 
+   };
+
   return (
     <div>
-      {data.map(({ name }, index) => (
-        <div key={index}>{name}</div>
+      {data.map(({ name, galleryid, url }, index) => (
+        <div>
+        <div key={index} className={name} > {name}</div> 
+          <div style={mystyle} >{galleryid}</div>
+          <div> 
+           <Counter />
+          </div>
+          <div >{url}</div>
+          </div>
       ))}
+{      console.log(data)}
     </div>
   );
 }
-
-// Draft
-// import React from "react";
-
-// export default function Data({ data }) {
-//   console.log(data);
-//   return (
-//     <>
-//       <div></div>
-//       {data.map((galleryid) => {
-//         return <div>{galleryid}</div>;
-//       })}
-//     </>
-//   );
-// }
