@@ -16,6 +16,8 @@ export default function Data() {
       .then((info) => setState(info.records));
   }, []);
 
+  
+
   const mystyle = {
     color: "red",
     backgroundColor: "DodgerBlue",
@@ -31,7 +33,7 @@ export default function Data() {
         <div key={index} className={name} > {name}</div> 
           <div style={mystyle} >{galleryid}</div>
           <div> 
-           <Counter />
+           <Counter price={galleryid}/>
           </div>
           <div >{url}</div>
           </div>
