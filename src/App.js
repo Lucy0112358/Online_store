@@ -1,17 +1,43 @@
 import * as React from "react";
-import { useState } from "react";
-import ProductItem from "./ProductItem";
 import "./App.css";
 import Data from "./Components/Data";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [products, setProducts] = useState(0);
-  const foo = () => setProducts(products + 1);
+  
   return (
     <>
-      <ProductItem prop1={products} funct1={foo} />
       <Data />
     </>
   );
 }
 export default App;
+
+// Draft
+// import * as React from "react";
+// import "./App.css";
+// import Data from "./Components/Data";
+// import { useState, useEffect } from "react";
+
+// function App() {
+//   const [data, setState] = useState([]);
+//   useEffect(() => {
+//     fetch(
+//       "https://api.harvardartmuseums.org/gallery?apikey=5858ca01-d093-45fd-8ba8-5ab8317ab101"
+//     )
+//       .then((res) => res.json())
+//       .then((data) =>
+//         setState(
+//           data.records.map(({ galleryid }) => {
+//             return galleryid;
+//           })
+//         )
+//       );
+//   }, []);
+//   return (
+//     <>
+//       <Data data={data} />
+//     </>
+//   );
+// }
+// export default App;
