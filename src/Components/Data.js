@@ -1,43 +1,28 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./data.css";
-import Counter from "./Counter";
+import { React, useRef } from "react";
 
-export default function Data() {
-  const [data, setState] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://api.harvardartmuseums.org/gallery?apikey=5858ca01-d093-45fd-8ba8-5ab8317ab101"
-    )
-      .then((res) => res.json())
-      .then((info) => setState(info.records));
-  }, []);
-
-  const mystyle = {
-    color: "red",
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial",
-    marginBottom: "100px",
-  };
+export default function Data({ products, addCount, decreaseCount, addToCard }) {
+  const reftest = useRef(null);
+  const refPrice = useRef(null);
 
   return (
     <div>
-      {data.map(({ name, galleryid, url }, index) => (
-        <div>
-          <div key={index} className={name}>
-            {name}
+      <div className="prodcontainer">
+        {products.map((product, index) => (
+          <div className={0}>
+            <div className="prodid" key={index}>
+              {product.id}
+            </div>
+            <img alt="alt" className="prodimage" src={product.image} />
+            <div className="prodid" ref={reftest}>
+              {product.price}
+            </div>
+            <div ref={refPrice}>{product.count}</div>
+            <button onClick={() => addCount(product.id)}>+</button>
+            <button onClick={() => decreaseCount(product.id)}>-</button>
+            <button onClick={() => addToCard(product)}>Add to card </button>
           </div>
-          <div style={mystyle}>{galleryid}</div>
-          <div>
-            <Counter price={galleryid} />
-          </div>
-          <div>{url}</div>
-          <button>Add to card </button>
-        </div>
-      ))}
-      {console.log(data)}
+        ))}
+      </div>
     </div>
   );
 }
